@@ -10,6 +10,13 @@ enable_testing()
 # include vcpkg before add executable
 set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 include(${VCPKG_DIRECTORY}/scripts/buildsystems/vcpkg.cmake)
+set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
+
+# include static / shared libraries
+## after include_directories we can run `cmake ..` successfully in `build` directory
+include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-static-lib)
+## after link_libraries `make` directive success
+link_libraries(${CMAKE_INSTALL_PREFIX}/lib/hello-static-lib/libhello-static-lib.a)
 
 add_executable(${PROJECT_NAME} main.cpp)
 add_executable(hello-test test.cpp)
@@ -57,7 +64,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
 # target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
 
 # test cmake install
-set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES ${PROJECT_BINARY_DIR}/config.h DESTINATION include)
 

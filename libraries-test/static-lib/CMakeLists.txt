@@ -14,3 +14,13 @@ add_executable(test1 main.cpp)
 add_test(test test1)
 
 # set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+
+set(VCPKG_DIRECTORY D:/softapp/vcpkg)
+set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
+install(
+    TARGETS hello-static-lib
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib/${PROJECT_NAME}
+)
+install(FILES hello-static-lib.h DESTINATION include/${PROJECT_NAME})
+

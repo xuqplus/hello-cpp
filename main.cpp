@@ -29,6 +29,12 @@ void run_function_in_my_lib2()
     function_in_my_lib2();
 }
 
+#include <hello-static-lib.h>
+void test_static_lib()
+{
+    test_f();
+}
+
 void test_curl()
 {
     CURL *curl;
@@ -58,6 +64,8 @@ int main(int, char **)
     run_function_in_my_lib();
 
     run_function_in_my_lib2();
+
+    test_static_lib();
 
     test_curl();
     return 0;
