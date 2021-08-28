@@ -50,8 +50,14 @@ set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 
 include(${VCPKG_DIRECTORY}/scripts/buildsystems/vcpkg.cmake)
 find_package(CURL CONFIG REQUIRED)
+# target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
 # target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
+
+# test cmake install
+set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES ${PROJECT_BINARY_DIR}/config.h DESTINATION include)
 
 # print messages
 message(VCPKG_DIRECTORY " -> " ${VCPKG_DIRECTORY})
