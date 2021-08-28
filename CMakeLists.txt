@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20.0)
-project(hello-cpp VERSION 0.1.0)
+project(hello-cpp VERSION 1.2.3)
 
 set(CONFIG_FILE config.h)
 configure_file(${CONFIG_FILE}.in ${CONFIG_FILE})
@@ -7,7 +7,7 @@ configure_file(${CONFIG_FILE}.in ${CONFIG_FILE})
 include(CTest)
 enable_testing()
 
-add_executable(hello-cpp main.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 add_executable(hello-test test.cpp)
 add_test(test1 hello-test)
 add_test(test2 hello-test)
@@ -17,14 +17,25 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
 # help to include config.h which's created by cmake
-target_include_directories(hello-cpp PUBLIC ${PROJECT_BINARY_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
+
+# set cxx standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED true)
+
+# add subdirectory
+add_subdirectory(MyLib)
+## add search path for header ?
+target_link_libraries(${PROJECT_NAME} PRIVATE my-lib)
+## add search path for library ?
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/MyLib)
 
 set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 
 include(${VCPKG_DIRECTORY}/scripts/buildsystems/vcpkg.cmake)
 find_package(CURL CONFIG REQUIRED)
-target_link_libraries(hello-cpp PRIVATE ${CURL_LIBRARIES})
-# target_link_libraries(hello-cpp PRIVATE CURL::libcurl)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
+# target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
 
 # print messages
 message(VCPKG_DIRECTORY " -> " ${VCPKG_DIRECTORY})

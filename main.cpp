@@ -10,6 +10,12 @@ void config_print()
     std::cout << "HELLO_CPP_VERSION_MINOR -> " << HELLO_CPP_VERSION_MINOR << std::endl;
 }
 
+#include <my-lib.h>
+void run_function_in_my_lib()
+{
+    function_in_my_lib();
+}
+
 void test_curl()
 {
     CURL *curl;
@@ -35,6 +41,8 @@ int main(int, char **)
     std::cout << "hello cpp .." << std::endl;
 
     config_print();
+
+    run_function_in_my_lib();
 
     test_curl();
     return 0;
