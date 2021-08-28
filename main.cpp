@@ -1,7 +1,14 @@
 #include <iostream>
+#include <config.h>
 #include <curl/curl.h>
 
 using namespace std;
+
+void config_print()
+{
+    std::cout << "HELLO_CPP_VERSION_MAJOR -> " << HELLO_CPP_VERSION_MAJOR << std::endl;
+    std::cout << "HELLO_CPP_VERSION_MINOR -> " << HELLO_CPP_VERSION_MINOR << std::endl;
+}
 
 void test_curl()
 {
@@ -26,6 +33,8 @@ void test_curl()
 int main(int, char **)
 {
     std::cout << "hello cpp .." << std::endl;
+
+    config_print();
 
     test_curl();
     return 0;
