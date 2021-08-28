@@ -42,6 +42,10 @@ if (USE_MY_LIB)
     # message(extra_includes -> ${extra_includes})
 endif()
 
+# use interface to add library
+add_subdirectory(my-lib2)
+target_link_libraries(${PROJECT_NAME} PRIVATE my-lib2)
+
 set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 
 include(${VCPKG_DIRECTORY}/scripts/buildsystems/vcpkg.cmake)

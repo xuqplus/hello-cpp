@@ -23,6 +23,12 @@ void run_function_in_my_lib()
 #endif
 }
 
+#include <my-lib2.h>
+void run_function_in_my_lib2()
+{
+    function_in_my_lib2();
+}
+
 void test_curl()
 {
     CURL *curl;
@@ -50,6 +56,8 @@ int main(int, char **)
     config_print();
 
     run_function_in_my_lib();
+
+    run_function_in_my_lib2();
 
     test_curl();
     return 0;
