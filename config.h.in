@@ -1,2 +1,8 @@
 #define HELLO_CPP_VERSION_MAJOR @hello-cpp_VERSION_MAJOR@
 #define HELLO_CPP_VERSION_MINOR @hello-cpp_VERSION_MINOR@
+
+#cmakedefine USE_MY_LIB
+
+#ifdef USE_MY_LIB
+#include <my-lib.h>
+#endif

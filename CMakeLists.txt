@@ -23,12 +23,24 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-# add subdirectory
-add_subdirectory(MyLib)
-## add search path for header ?
-target_link_libraries(${PROJECT_NAME} PRIVATE my-lib)
-## add search path for library ?
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/MyLib)
+# compile option / conditional compilation
+## try use `cmake .. -DUSE_MY_LIB=off` when build
+option(USE_MY_LIB "Whether use my lib or not" on)
+
+if (USE_MY_LIB)
+    # add subdirectory
+    add_subdirectory(MyLib)
+    ## add search path for header ?
+    target_link_libraries(${PROJECT_NAME} PUBLIC my-lib)
+    ## add search path for library ?
+    target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/MyLib)
+    ## list for what ? - a data structure / a data contrainer ..
+    list(APPEND extra_libs my-lib)
+    list(APPEND extra_libs my-lib)
+    # list(APPEND extra_includes MyLib)
+    message(extra_libs -> ${extra_libs})
+    # message(extra_includes -> ${extra_includes})
+endif()
 
 set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 

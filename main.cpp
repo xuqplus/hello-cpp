@@ -10,10 +10,17 @@ void config_print()
     std::cout << "HELLO_CPP_VERSION_MINOR -> " << HELLO_CPP_VERSION_MINOR << std::endl;
 }
 
-#include <my-lib.h>
 void run_function_in_my_lib()
 {
-    function_in_my_lib();
+#ifndef USE_MY_LIB
+    {
+        std::cout << "USE_MY_LIB - my lib not compiled .." << std::endl;
+    }
+#else
+    {
+        function_in_my_lib();
+    }
+#endif
 }
 
 void test_curl()
