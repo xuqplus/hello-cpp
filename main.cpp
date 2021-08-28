@@ -35,6 +35,12 @@ void test_static_lib()
     test_f();
 }
 
+#include <hello-shared-lib.h>
+void test_shared_lib()
+{
+    test_g();
+}
+
 void test_curl()
 {
     CURL *curl;
@@ -66,6 +72,8 @@ int main(int, char **)
     run_function_in_my_lib2();
 
     test_static_lib();
+
+    test_shared_lib();
 
     test_curl();
     return 0;

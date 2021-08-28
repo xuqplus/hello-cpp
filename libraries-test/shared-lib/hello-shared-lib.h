@@ -1,4 +1,4 @@
-#ifndef __HELLO_SHARED_LIB_TEST_F__
-#define __HELLO_SHARED_LIB_TEST_F__
-void test_f();
+#ifndef __HELLO_SHARED_LIB_TEST_G__
+#define __HELLO_SHARED_LIB_TEST_G__
+void test_g();
 #endif

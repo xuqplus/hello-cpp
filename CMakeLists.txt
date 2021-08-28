@@ -17,6 +17,10 @@ set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
 include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-static-lib)
 ## after link_libraries `make` directive success
 link_libraries(${CMAKE_INSTALL_PREFIX}/lib/hello-static-lib/libhello-static-lib.a)
+## use shared lib
+include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-shared-lib)
+link_libraries(${CMAKE_INSTALL_PREFIX}/share/hello-shared-lib/libhello-shared-lib.dll.a)
+link_libraries(${CMAKE_INSTALL_PREFIX}/bin/libhello-shared-lib.dll)
 
 add_executable(${PROJECT_NAME} main.cpp)
 add_executable(hello-test test.cpp)
