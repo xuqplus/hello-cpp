@@ -9,6 +9,13 @@ enable_testing()
 
 if(${CMAKE_SYSTEM} MATCHES WSL2)
     message("WSL2 .. -> " ${CMAKE_SYSTEM})
+    # include_directories(/usr/include/x86_64-linux-gnu/)
+    # include static/shared headers
+    include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-static-lib)
+    include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-shared-lib)
+    # link static/shared libs
+    link_libraries(${CMAKE_INSTALL_PREFIX}/lib/hello-static-lib/libhello-static-lib.a)
+    link_libraries(${CMAKE_INSTALL_PREFIX}/share/libhello-shared-lib.so)
 elseif(${CMAKE_SYSTEM} MATCHES Windows)
     message("Windows .. -> " ${CMAKE_SYSTEM})
     
@@ -72,7 +79,8 @@ find_package(CURL CONFIG REQUIRED)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
 # what is CURL::libcurl ? 
-# target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
+# CURL::libcurl worked on linux .. ?
+target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
 
 # test cmake install
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
