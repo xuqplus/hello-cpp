@@ -16,8 +16,8 @@ add_test(test test1)
 # set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 
-if(${CMAKE_SYSTEM} MATCHES WSL2)
-    message("WSL2 .. -> " ${CMAKE_SYSTEM})
+if(${CMAKE_SYSTEM} MATCHES WSL2|Linux)
+    message("CMAKE_SYSTEM -> " ${CMAKE_SYSTEM})
     message("CMAKE_INSTALL_PREFIX -> " ${CMAKE_INSTALL_PREFIX})
 elseif(${CMAKE_SYSTEM} MATCHES Windows)
     message("Windows .. -> " ${CMAKE_SYSTEM})

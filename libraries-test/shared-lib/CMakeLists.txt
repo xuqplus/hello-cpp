@@ -15,8 +15,8 @@ add_test(test test1)
 
 # set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
-if(${CMAKE_SYSTEM} MATCHES WSL2)
-    message("WSL2 .. -> " ${CMAKE_SYSTEM})
+if(${CMAKE_SYSTEM} MATCHES WSL2 OR ${CMAKE_SYSTEM} MATCHES Linux)
+    message("CMAKE_SYSTEM -> " ${CMAKE_SYSTEM})
     install(
         TARGETS hello-shared-lib
         LIBRARY DESTINATION share
