@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20.0)
+cmake_minimum_required(VERSION 3.10.0)
 project(hello-cpp VERSION 1.2.3)
 
 set(CONFIG_FILE config.h)
@@ -7,6 +7,11 @@ configure_file(${CONFIG_FILE}.in ${CONFIG_FILE})
 include(CTest)
 enable_testing()
 
+if(${CMAKE_SYSTEM} MATCHES WSL2)
+    message("WSL2 .. -> " ${CMAKE_SYSTEM})
+elseif(${CMAKE_SYSTEM} MATCHES Windows)
+    message("Windows .. -> " ${CMAKE_SYSTEM})
+    
 # include vcpkg before add executable
 set(VCPKG_DIRECTORY D:/softapp/vcpkg)
 include(${VCPKG_DIRECTORY}/scripts/buildsystems/vcpkg.cmake)
@@ -21,6 +26,8 @@ link_libraries(${CMAKE_INSTALL_PREFIX}/lib/hello-static-lib/libhello-static-lib.
 include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-shared-lib)
 link_libraries(${CMAKE_INSTALL_PREFIX}/share/hello-shared-lib/libhello-shared-lib.dll.a)
 link_libraries(${CMAKE_INSTALL_PREFIX}/bin/libhello-shared-lib.dll)
+
+endif()
 
 add_executable(${PROJECT_NAME} main.cpp)
 add_executable(hello-test test.cpp)
@@ -82,4 +89,4 @@ message(CURL_VERSION_STRING " -> " ${CURL_VERSION_STRING})
 message(PROJECT_NAME " -> " ${PROJECT_NAME})
 message(PROJECT_VERSION " -> " ${PROJECT_VERSION})
 message(PROJECT_BINARY_DIR " -> " ${PROJECT_BINARY_DIR})
-message(CMAKE_SYSTEM " -> " ${PROJECT_BINARY_DIR})
+message(CMAKE_SYSTEM " -> " ${CMAKE_SYSTEM})
