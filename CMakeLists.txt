@@ -8,9 +8,9 @@ include(CTest)
 enable_testing()
 
 if(${CMAKE_SYSTEM} MATCHES WSL2|Linux)
-    message("WSL2 .. -> " ${CMAKE_SYSTEM})
-    link_libraries(/usr/lib/x86_64-linux-gnu/libcurl.so)
-    include_directories(/usr/share/x86_64-linux-gnu/)
+    message("CMAKE_SYSTEM .. -> " ${CMAKE_SYSTEM})
+    # link_libraries(/usr/lib/x86_64-linux-gnu/libcurl.so)
+    # include_directories(/usr/share/x86_64-linux-gnu/)
     # include static/shared headers
     include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-static-lib)
     include_directories(${CMAKE_INSTALL_PREFIX}/include/hello-shared-lib)
@@ -76,12 +76,17 @@ endif()
 add_subdirectory(my-lib2)
 target_link_libraries(${PROJECT_NAME} PRIVATE my-lib2)
 
-#find_package(CURL CONFIG REQUIRED)
-#target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
-#target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
+# find_package(CURL CONFIG REQUIRED)
+find_library(
+    CURL_LIBRARIES
+    NAMES libcurl.so
+    PATHS /usr/lib/x86_64-linux-gnu
+)
+# target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
 # what is CURL::libcurl ? 
 # CURL::libcurl worked on linux .. ?
-#target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
+# target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
 
 # test cmake install
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
@@ -94,6 +99,8 @@ message(CURL_FOUND " -> " ${CURL_FOUND})
 message(CURL_LIBRARIES " -> " ${CURL_LIBRARIES})
 message(CURL_INCLUDE_DIRS " -> " ${CURL_INCLUDE_DIRS})
 message(CURL_VERSION_STRING " -> " ${CURL_VERSION_STRING})
+message(PC_CURL_INCLUDE_DIRS " -> " ${PC_CURL_INCLUDE_DIRS})
+message(FindPkgConfig " -> " ${FindPkgConfig})
 ## project related variables
 message(PROJECT_NAME " -> " ${PROJECT_NAME})
 message(PROJECT_VERSION " -> " ${PROJECT_VERSION})
