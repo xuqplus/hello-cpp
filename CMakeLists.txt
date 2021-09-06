@@ -76,17 +76,16 @@ endif()
 add_subdirectory(my-lib2)
 target_link_libraries(${PROJECT_NAME} PRIVATE my-lib2)
 
-# find_package(CURL CONFIG REQUIRED)
-find_library(
-    CURL_LIBRARIES
-    NAMES libcurl.so
-    PATHS /usr/lib/x86_64-linux-gnu
-)
-# target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
+find_package(CURL MODULE REQUIRED)
+# find_library(
+#    CURL_LIBRARIES
+#    NAMES libcurl.so
+#    PATHS /usr/lib/x86_64-linux-gnu
+# )
+target_include_directories(${PROJECT_NAME} PRIVATE ${CURL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${CURL_LIBRARIES})
-# what is CURL::libcurl ? 
-# CURL::libcurl worked on linux .. ?
-# target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
+# or below line use namespace when link libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE CURL::libcurl)
 
 # test cmake install
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
