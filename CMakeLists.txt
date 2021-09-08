@@ -105,3 +105,13 @@ message(PROJECT_NAME " -> " ${PROJECT_NAME})
 message(PROJECT_VERSION " -> " ${PROJECT_VERSION})
 message(PROJECT_BINARY_DIR " -> " ${PROJECT_BINARY_DIR})
 message(CMAKE_SYSTEM " -> " ${CMAKE_SYSTEM})
+
+# test drongon
+add_executable(test-drogon test-drogon.cpp)
+find_package(Drogon)
+target_link_libraries(test-drogon ${DROGON_LIBRARIES})
+# find_package()
+# find_package(Drogon CONFIG)
+message(Drogon_FOUND " -> " ${Drogon_FOUND})
+message(DROGON_LIBRARIES " -> " ${DROGON_LIBRARIES})
+message(DROGON_INCLUDE_DIRS " -> " ${DROGON_INCLUDE_DIRS})
