@@ -22,7 +22,7 @@ if(${CMAKE_SYSTEM} MATCHES WSL2|Linux)
 elseif(${CMAKE_SYSTEM} MATCHES Windows)
     message("Windows .. -> " ${CMAKE_SYSTEM})
 
-set(VCPKG_DIRECTORY D:/softapp/vcpkg)
+set(VCPKG_DIRECTORY C:/software/vcpkg)
 set(CMAKE_INSTALL_PREFIX ${VCPKG_DIRECTORY}/installed/x64-windows)
 endif()
 
